@@ -1,15 +1,18 @@
 import { getUserName } from './cli/args.js';
-import readline from 'readline/promises'
+import readline from 'node:readline/promises';
 import { exitUser } from './userManager/exitUser.js';
+import { outputCurrentPath } from './userManager/outputCurrentPath.js';
+import os from 'node:os';
 
 const userName = getUserName();
+let currentPath = os.homedir();
 
 console.log(`Welcome to the File Manager, ${userName}!`);
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-})
+});
 
 
 rl.on('line', async (userArguments) => {
@@ -19,6 +22,14 @@ rl.on('line', async (userArguments) => {
         rl.close();
         return;
     }
+    if (userArguments === 'test') {
+        console.log('---------------------test--------------------------');
+        return;
+    } else {
+        console.log(`Invalid input`);
+        outputCurrentPath(currentPath);
+    }
+
 });
 
 
@@ -26,4 +37,4 @@ rl.on('line', async (userArguments) => {
 rl.on('SIGINT', async () => {
     exitUser(userName);
     rl.close();
-})
+});
