@@ -3,6 +3,7 @@ import readline from 'node:readline/promises';
 import { exitUser } from './userManager/exitUser.js';
 import { outputCurrentPath } from './userManager/outputCurrentPath.js';
 import os from 'node:os';
+import { commandUp } from './navi/up.js';
 
 const userName = getUserName();
 let currentPath = os.homedir();
@@ -22,8 +23,9 @@ rl.on('line', async (userArguments) => {
         rl.close();
         return;
     }
-    if (userArguments === 'test') {
-        console.log('---------------------test--------------------------');
+    if (userArguments === 'up') {
+        currentPath = commandUp(currentPath);
+        outputCurrentPath(currentPath);
         return;
     } else {
         console.log(`Invalid input`);
