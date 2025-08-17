@@ -1,0 +1,23 @@
+1. .exit => exit to app.
+2. up => Go upper from current directory.
+3. cd path_to_directory => Go to dedicated folder from current directory.
+4. ls => Print in console list of all files and folders in current directory.
+--- Basic operations with files.
+5. cat path_to_file => Read file and print it's content in console.
+6. add new_file_name => Create empty file in current working directory.
+7. mkdir new_directory_name => Create new directory in current working directory.
+8. rn path_to_file new_filename => Rename file.
+9. cp path_to_file path_to_new_directory => Copy file.
+10. mv path_to_file path_to_new_directory => Move file.
+11. rm path_to_file => Delete file.
+--- Operating system info.
+12. os --EOL => Get EOL.
+13. os --cpus => Get host machine CPUs info.
+14. os --homedir => Get home directory.
+15. os --username => Get current system user name.
+16. os --architecture => Get CPU architecture for which Node.js binary has compiled.
+--- Hash calculation.
+17. hash path_to_file => Calculate hash for file.
+--- Compress and decompress operations.
+18. compress path_to_file path_to_destination => Compress file.
+19. decompress path_to_file path_to_destination => decompress file.
