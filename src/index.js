@@ -11,7 +11,8 @@ import { createFolder } from './fs/createNewPath.js'
 import { renameFile } from "./fs/renameFile.js";
 import { copyPath } from './fs/copyPath.js'
 import { changeDirectory } from './nav/cdPath.js'
-import {upDir} from './nav/upDir.js'
+import { upDir } from './nav/upDir.js';
+import { calcHash } from "./hash/calcHash.js";
 
 const rootDir = getHomeDir();
 let currentPath = rootDir;
@@ -95,11 +96,15 @@ rl.on('line', async userArgs => {
             await removePath(currentPath + '/' + mwPath);
             break;
         case trimUserArgs.startsWith('cd') && trimUserArgs:
-            const cdPath = trimUserArgs.slice('3').trim()
+            const cdPath = trimUserArgs.slice('3').trim();
             currentPath = await changeDirectory(currentPath + '/' + cdPath,);
             break;
         case trimUserArgs.startsWith('up') && trimUserArgs:
             currentPath = upDir(rootDir, currentPath);
+            break;
+        case trimUserArgs.startsWith('hash') && trimUserArgs:
+            const hashFilePath = trimUserArgs.slice('5').trim();
+            await calcHash(currentPath + '/' + hashFilePath);
             break;
         default:
             console.log(`Invalid input: ${userArgs}`);
