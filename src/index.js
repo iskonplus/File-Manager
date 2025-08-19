@@ -13,7 +13,8 @@ import { copyPath } from './fs/copyPath.js'
 import { changeDirectory } from './nav/cdPath.js'
 import { upDir } from './nav/upDir.js';
 import { calcHash } from "./hash/calcHash.js";
-import {compressFile} from './compression/compress.js'
+import { compressFile } from './compression/compress.js';
+import {decompressFile} from './compression/decompress.js'
 
 const rootDir = getHomeDir();
 let currentPath = rootDir;
@@ -110,6 +111,10 @@ rl.on('line', async userArgs => {
         case trimUserArgs.startsWith('compress') && trimUserArgs:
             const compressFilePath = trimUserArgs.slice('9').trim();
             await compressFile(currentPath + '/' + compressFilePath );
+            break;
+        case trimUserArgs.startsWith('decompress') && trimUserArgs:
+            const deCompressFilePath = trimUserArgs.slice('11').trim();
+            await decompressFile(currentPath + '/' + deCompressFilePath );
             break;
         default:
             console.log(`Invalid input: ${userArgs}`);
