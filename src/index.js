@@ -91,7 +91,7 @@ rl.on('line', async userArgs => {
             const cpNewPath = trimUserArgs.slice('3').trim().split(' ')[1];
             await copyPath(currentPath + '/' + cpPath, currentPath + '/' + cpNewPath);
             break;
-        case trimUserArgs.startsWith('mw') && trimUserArgs:
+        case trimUserArgs.startsWith('mv') && trimUserArgs:
             const mwPath = trimUserArgs.slice('3').trim().split(' ')[0];
             const mwNewPath = trimUserArgs.slice('3').trim().split(' ')[1];
             await copyPath(currentPath + '/' + mwPath, currentPath + '/' + mwNewPath + '/' + mwPath);
