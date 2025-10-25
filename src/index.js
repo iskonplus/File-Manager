@@ -14,8 +14,9 @@ const rlInterface = readline.createInterface({
 console.log(`Welcome to the File Manager, ${userName}!`);
 
 rlInterface.on('line', async userArg => {
+    const trimUserArg = userArg.trim();
 
-    switch (userArg) {
+    switch (trimUserArg) {
         case '.exit':
             userExit(userName, rlInterface);
             rlInterface.close();
