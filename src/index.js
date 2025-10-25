@@ -1,11 +1,18 @@
 import readline from 'readline/promises';
+import { getUserName } from './cli/args.js';
 
-const rl = readline.createInterface({
+
+const userName = getUserName();
+
+const rlInterface = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 });
 
-rl.on('line', async userArg => {
+
+console.log(`Welcome to the File Manager, ${userName}!`);
+
+rlInterface.on('line', async userArg => {
 
     switch (userArg) {
         case ' ':
@@ -18,6 +25,6 @@ rl.on('line', async userArg => {
 
 })
 
-rl.on('SIGINT', async () => {
-    rl.close();
+rlInterface.on('SIGINT', async () => {
+    rlInterface.close();
 });
