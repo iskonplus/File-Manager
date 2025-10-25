@@ -4,6 +4,7 @@ import { userExit } from './userManager/userExit.js';
 import { getHomeDir } from './os/os.js';
 import { upDir } from './nav/upDir.js';
 import { changeDirectory } from './nav/cdDir.js';
+import { list } from './fs/list.js';
 
 
 const userName = getUserName();
@@ -25,8 +26,8 @@ console.log(' ');
 rlInterface.on('line', async args => {
 
     const cleanUserArgs = args.split(' ').filter(arg => arg !== '');
-    // const userCommand = cleanUserArgs[0];
-    const userArg = cleanUserArgs[1];
+    const userArg = cleanUserArgs.filter((_, ind) => ind !== 0).join(' ');
+    console.log('====>',userArg);
 
     switch (cleanUserArgs.join(' ')) {
         case '.exit':
@@ -38,6 +39,9 @@ rlInterface.on('line', async args => {
             break;
         case `cd ${userArg}`:
             currentPath = await changeDirectory(currentPath, userArg);
+            break;
+        case 'ls':
+            await list(currentPath);
             break;
 
         default:
