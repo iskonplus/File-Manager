@@ -1,5 +1,5 @@
 import { createReadStream } from 'fs';
-const error = new Error('Operation failed.');
+import { error } from '../errors/error.js';
 
 
 export const printFile = async (filePath) => {

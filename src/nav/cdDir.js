@@ -1,6 +1,7 @@
 import { stat } from 'fs/promises';
 import path from 'path';
-const error = new Error('Operation failed.');
+import { error } from '../errors/error.js';
+
 
 export const changeDirectory = async (currentPath, userPath) => {
     console.log(' ');

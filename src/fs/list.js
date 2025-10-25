@@ -1,6 +1,6 @@
 import { readdir } from 'fs/promises';
+import {error} from '../errors/error.js'
 
-const error = new TypeError('FS operation failed');
 
 export const list = async (currentPath) => {
   try {
