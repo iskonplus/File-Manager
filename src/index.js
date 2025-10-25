@@ -47,10 +47,10 @@ rlInterface.on('line', async args => {
             await list(currentPath);
             break;
         case `cat ${userArg}`:
-            await printFile(currentPath + '/' + userArg);
+            await printFile(currentPath , userArg);
             break;
         case `add ${userArg}`:
-            await createFile(currentPath + '/' + userArg);
+            await createFile(currentPath , userArg);
             break;
 
         default:
