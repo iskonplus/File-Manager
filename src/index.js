@@ -20,9 +20,9 @@ console.log(`You are currently in ${currentPath}`);
 
 rlInterface.on('line', async userArg => {
 
-    const trimUserArg = userArg.trim();
+    const cleanUserArg = userArg.trim().toLowerCase();
 
-    switch (trimUserArg) {
+    switch (cleanUserArg) {
         case '.exit':
             userExit(userName, rlInterface);
             rlInterface.close();
