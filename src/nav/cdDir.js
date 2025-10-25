@@ -1,5 +1,6 @@
 import { stat } from 'fs/promises';
 import path from 'path';
+const error = new Error('Operation failed.');
 
 export const changeDirectory = async (currentPath, userPath) => {
     console.log(' ');
@@ -26,7 +27,7 @@ export const changeDirectory = async (currentPath, userPath) => {
         return newPath;
 
     } catch (err) {
-        console.error('Something go wrong:', err.message);
+        console.error('Something go wrong:', error.message);
         return currentPath;
     }
 }

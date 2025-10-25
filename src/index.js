@@ -5,6 +5,7 @@ import { getHomeDir } from './os/os.js';
 import { upDir } from './nav/upDir.js';
 import { changeDirectory } from './nav/cdDir.js';
 import { list } from './fs/list.js';
+import { printFile } from './fs/readFile.js';
 
 
 const userName = getUserName();
@@ -42,6 +43,9 @@ rlInterface.on('line', async args => {
             break;
         case 'ls':
             await list(currentPath);
+            break;
+        case `cat ${userArg}`:
+            await printFile(currentPath + '/' + userArg);
             break;
 
         default:
