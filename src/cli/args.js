@@ -1,6 +1,6 @@
 export const getUserName = () => {
 
-    const message = 'Username not provided'
+    const message = 'No name user'
     const userName = process.argv
         .filter(arg => arg.startsWith('--username'))[0]
 
