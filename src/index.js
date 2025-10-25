@@ -3,6 +3,7 @@ import { getUserName } from './cli/args.js';
 import { userExit } from './userManager/userExit.js';
 import { getHomeDir } from './os/os.js';
 import { upDir } from './nav/upDir.js';
+import { changeDirectory } from './nav/cdDir.js';
 
 
 const userName = getUserName();
@@ -16,15 +17,18 @@ const rlInterface = readline.createInterface({
 });
 
 
+console.log(' ');
 console.log(`Welcome to the File Manager, ${userName}!`);
 console.log(`You are currently in ${currentPath}`);
+console.log(' ');
 
-rlInterface.on('line', async userArg => {
+rlInterface.on('line', async args => {
 
-    const cleanUserArg = userArg.trim().toLowerCase();
-    console.log(cleanUserArg);
+    const cleanUserArgs = args.split(' ').filter(arg => arg !== '');
+    // const userCommand = cleanUserArgs[0];
+    const userArg = cleanUserArgs[1];
 
-    switch (cleanUserArg) {
+    switch (cleanUserArgs.join(' ')) {
         case '.exit':
             userExit(userName, rlInterface);
             rlInterface.close();
@@ -32,13 +36,18 @@ rlInterface.on('line', async userArg => {
         case 'up':
             currentPath = upDir(rootDir, currentPath);
             break;
+        case `cd ${userArg}`:
+            currentPath = await changeDirectory(currentPath, userArg);
+            break;
+
         default:
-            console.log(`Invalid input: ${userArg}`);
+            console.log('');
+            console.log(`Invalid input: ${args}`);
             break;
     }
 
-    console.log('');
     console.log(`You are currently in ${currentPath}`);
+    console.log('');
 
 })
 
