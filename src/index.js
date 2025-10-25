@@ -6,6 +6,7 @@ import { upDir } from './nav/upDir.js';
 import { changeDirectory } from './nav/cdDir.js';
 import { list } from './fs/list.js';
 import { printFile } from './fs/readFile.js';
+import { createFile } from './fs/addFile.js';
 
 
 const userName = getUserName();
@@ -28,6 +29,7 @@ rlInterface.on('line', async args => {
 
     const cleanUserArgs = args.split(' ').filter(arg => arg !== '');
     const userArg = cleanUserArgs.filter((_, ind) => ind !== 0).join(' ');
+
     console.log('====>',userArg);
 
     switch (cleanUserArgs.join(' ')) {
@@ -46,6 +48,9 @@ rlInterface.on('line', async args => {
             break;
         case `cat ${userArg}`:
             await printFile(currentPath + '/' + userArg);
+            break;
+        case `add ${userArg}`:
+            await createFile(currentPath + '/' + userArg);
             break;
 
         default:

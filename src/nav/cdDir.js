@@ -28,7 +28,7 @@ export const changeDirectory = async (currentPath, userPath) => {
         return newPath;
 
     } catch (err) {
-        console.error('Something go wrong:', error.message);
+        console.error('Something went wrong:', error.message);
         return currentPath;
     }
 }
