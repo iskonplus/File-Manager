@@ -7,6 +7,7 @@ import { changeDirectory } from './nav/cdDir.js';
 import { list } from './fs/list.js';
 import { printFile } from './fs/readFile.js';
 import { createFile } from './fs/addFile.js';
+import {createPath}from './fs/addPath.js'
 
 
 const userName = getUserName();
@@ -30,8 +31,6 @@ rlInterface.on('line', async args => {
     const cleanUserArgs = args.split(' ').filter(arg => arg !== '');
     const userArg = cleanUserArgs.filter((_, ind) => ind !== 0).join(' ');
 
-    console.log('====>',userArg);
-
     switch (cleanUserArgs.join(' ')) {
         case '.exit':
             userExit(userName, rlInterface);
@@ -51,6 +50,9 @@ rlInterface.on('line', async args => {
             break;
         case `add ${userArg}`:
             await createFile(currentPath , userArg);
+            break;
+        case `mkdir ${userArg}`:
+            await createPath(currentPath , userArg);
             break;
 
         default:
