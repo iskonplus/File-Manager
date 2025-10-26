@@ -9,6 +9,7 @@ import { printFile } from './fs/readFile.js';
 import { createFile } from './fs/addFile.js';
 import { createPath } from './fs/addPath.js';
 import { renameFile } from './fs/renameFile.js';
+import { cpFile } from './fs/copyFile.js';
 
 
 const userName = getUserName();
@@ -57,6 +58,9 @@ rlInterface.on('line', async args => {
             break;
         case `rn ${userArg}`:
             await renameFile(currentPath , ...userArg.split(' '));
+            break;
+        case `cp ${userArg}`:
+            await cpFile(currentPath , ...userArg.split(' '));
             break;
 
         default:
