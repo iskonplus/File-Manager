@@ -12,7 +12,6 @@ import { renameFile } from './fs/renameFile.js';
 import { cpFile } from './fs/copyFile.js';
 import { deletePath } from './fs/deletePath.js';
 import { moveFile } from './fs/moveFile.js';
-// import path from 'path';
 
 
 const userName = getUserName();
@@ -68,6 +67,10 @@ rlInterface.on('line', async args => {
         case `mv ${userArg}`:
             await moveFile(currentPath, ...userArg.split(' '));
             break;
+        case `rm ${userArg}`:
+            console.log(' ');
+            await deletePath(currentPath, ...userArg.split(' '));
+            break;
 
         default:
             console.log('');
@@ -76,7 +79,7 @@ rlInterface.on('line', async args => {
     }
 
     console.log(`You are currently in ${currentPath}`);
-    console.log('');
+    console.log(' ');
 
 })
 

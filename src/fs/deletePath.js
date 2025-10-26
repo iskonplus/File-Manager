@@ -12,7 +12,6 @@ export const deletePath = async (currentPath, fileName) => {
     try {
         await fs.promises.unlink(filePath);
         console.log(`File ${fileName} has been deleted from ${currentPath}`);
-        console.log(' ');
 
     } catch {
         console.error('Something went wrong:', error.message);
