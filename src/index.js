@@ -10,6 +10,9 @@ import { createFile } from './fs/addFile.js';
 import { createPath } from './fs/addPath.js';
 import { renameFile } from './fs/renameFile.js';
 import { cpFile } from './fs/copyFile.js';
+import { deletePath } from './fs/deletePath.js';
+import { moveFile } from './fs/moveFile.js';
+// import path from 'path';
 
 
 const userName = getUserName();
@@ -48,19 +51,22 @@ rlInterface.on('line', async args => {
             await list(currentPath);
             break;
         case `cat ${userArg}`:
-            await printFile(currentPath , userArg);
+            await printFile(currentPath, userArg);
             break;
         case `add ${userArg}`:
-            await createFile(currentPath , userArg);
+            await createFile(currentPath, userArg);
             break;
         case `mkdir ${userArg}`:
-            await createPath(currentPath , userArg);
+            await createPath(currentPath, userArg);
             break;
         case `rn ${userArg}`:
-            await renameFile(currentPath , ...userArg.split(' '));
+            await renameFile(currentPath, ...userArg.split(' '));
             break;
         case `cp ${userArg}`:
-            await cpFile(currentPath , ...userArg.split(' '));
+            await cpFile(currentPath, ...userArg.split(' '));
+            break;
+        case `mv ${userArg}`:
+            await moveFile(currentPath, ...userArg.split(' '));
             break;
 
         default:
