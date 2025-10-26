@@ -7,7 +7,8 @@ import { changeDirectory } from './nav/cdDir.js';
 import { list } from './fs/list.js';
 import { printFile } from './fs/readFile.js';
 import { createFile } from './fs/addFile.js';
-import {createPath}from './fs/addPath.js'
+import { createPath } from './fs/addPath.js';
+import { renameFile } from './fs/renameFile.js';
 
 
 const userName = getUserName();
@@ -53,6 +54,9 @@ rlInterface.on('line', async args => {
             break;
         case `mkdir ${userArg}`:
             await createPath(currentPath , userArg);
+            break;
+        case `rn ${userArg}`:
+            await renameFile(currentPath , ...userArg.split(' '));
             break;
 
         default:
