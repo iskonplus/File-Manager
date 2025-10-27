@@ -2,16 +2,10 @@ import readline from 'readline/promises';
 import { getUserName } from './cli/args.js';
 import { userExit } from './userManager/userExit.js';
 import { getHomeDir } from './os/os.js';
-import { upDir } from './nav/upDir.js';
-import { changeDirectory } from './nav/cdDir.js';
-import { list } from './fs/list.js';
-import { printFile } from './fs/readFile.js';
-import { createFile } from './fs/addFile.js';
-import { createPath } from './fs/addPath.js';
-import { renameFile } from './fs/renameFile.js';
-import { cpFile } from './fs/copyFile.js';
-import { deletePath } from './fs/deletePath.js';
-import { moveFile } from './fs/moveFile.js';
+
+import { add, mkdir, cp, rm, ls, mv, cat, rn } from './fs/barrelFs.js';
+import { cd, up } from './nav/barrelNav.js';
+
 
 
 const userName = getUserName();
@@ -41,35 +35,35 @@ rlInterface.on('line', async args => {
             rlInterface.close();
             break;
         case 'up':
-            currentPath = upDir(rootDir, currentPath);
+            currentPath = up(rootDir, currentPath);
             break;
         case `cd ${userArg}`:
-            currentPath = await changeDirectory(currentPath, userArg);
+            currentPath = await cd(currentPath, userArg);
             break;
         case 'ls':
-            await list(currentPath);
+            await ls(currentPath);
             break;
         case `cat ${userArg}`:
-            await printFile(currentPath, userArg);
+            await cat(currentPath, userArg);
             break;
         case `add ${userArg}`:
-            await createFile(currentPath, userArg);
+            await add(currentPath, userArg);
             break;
         case `mkdir ${userArg}`:
-            await createPath(currentPath, userArg);
+            await mkdir(currentPath, userArg);
             break;
         case `rn ${userArg}`:
-            await renameFile(currentPath, ...userArg.split(' '));
+            await rn(currentPath, ...userArg.split(' '));
             break;
         case `cp ${userArg}`:
-            await cpFile(currentPath, ...userArg.split(' '));
+            await cp(currentPath, ...userArg.split(' '));
             break;
         case `mv ${userArg}`:
-            await moveFile(currentPath, ...userArg.split(' '));
+            await mv(currentPath, ...userArg.split(' '));
             break;
         case `rm ${userArg}`:
             console.log(' ');
-            await deletePath(currentPath, ...userArg.split(' '));
+            await rm(currentPath, ...userArg.split(' '));
             break;
 
         default:

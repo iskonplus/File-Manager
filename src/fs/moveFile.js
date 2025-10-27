@@ -1,5 +1,4 @@
-import { cpFile } from './copyFile.js';
-import { deletePath } from './deletePath.js';
+import { cp, rm } from './barrelFs.js';
 import { errOperation } from '../errors/errOperation.js';
 
 
@@ -7,8 +6,8 @@ import { errOperation } from '../errors/errOperation.js';
 export const moveFile = async (currentPath, fileName, filePath) => {
 
     try {
-        await cpFile(currentPath, fileName, filePath);
-        await deletePath(currentPath, fileName);
+        await cp(currentPath, fileName, filePath);
+        await rm(currentPath, fileName);
         
     } catch {
         const error = errOperation();
