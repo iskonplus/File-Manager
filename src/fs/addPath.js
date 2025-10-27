@@ -1,6 +1,6 @@
 import path from 'path';
 import { mkdir } from 'fs/promises';
-import { error } from '../errors/error.js';
+import { errOperation } from '../errors/errOperation.js'
 
 
 export const createPath = async(currentPath, userPath) => {
@@ -11,7 +11,8 @@ export const createPath = async(currentPath, userPath) => {
         await mkdir(filePath, { recursive: true });
         console.log('Folder has been created.');
         
-    } catch (err) {
-        console.error('Something went wrong:', error.message);
+    } catch {
+        const error = errOperation();
+        console.error(error.message);
     }
 }

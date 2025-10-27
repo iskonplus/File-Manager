@@ -1,6 +1,6 @@
 import { cpFile } from './copyFile.js';
 import { deletePath } from './deletePath.js';
-import { error } from '../errors/error.js';
+import { errOperation } from '../errors/errOperation.js';
 
 
 
@@ -10,7 +10,8 @@ export const moveFile = async (currentPath, fileName, filePath) => {
         await cpFile(currentPath, fileName, filePath);
         await deletePath(currentPath, fileName);
         
-    } catch (err) {
-        console.error('Something went wrong: ', error.message);
+    } catch {
+        const error = errOperation();
+        console.error(error.message);
     }
 }

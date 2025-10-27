@@ -1,34 +1,31 @@
-import { stat } from 'fs/promises';
+import { access, stat } from 'fs/promises';
 import path from 'path';
-import { error } from '../errors/error.js';
-
+import { errOperation } from '../errors/errOperation.js'; // () => new Error('Operation failed')
 
 export const changeDirectory = async (currentPath, userPath) => {
-    console.log(' ');
+  console.log(' ');
 
-    try {
+  try {
 
-        if (currentPath === userPath) {
-            throw new Error('You are already in this folder');
-        }
+    const newPath = path.isAbsolute(userPath)
+      ? path.normalize(userPath)
+      : path.resolve(currentPath, userPath);
 
-        const newPath = path.isAbsolute(userPath)
-            ? userPath
-            : path.join(currentPath, userPath);
-
-        const isNewPathDirectory = await stat(newPath);
-
-        if (!isNewPathDirectory.isDirectory()) {
-            throw new Error('Not a directory');
-        }
-
-        process.chdir(newPath);
-        console.log('Directory has been changed.');
-
-        return newPath;
-
-    } catch (err) {
-        console.error('Something went wrong:', error.message);
-        return currentPath;
+    if (path.resolve(newPath) === path.resolve(currentPath)) {
+      return currentPath;
     }
-}
+
+    await access(newPath).catch(() => { throw errOperation(); });
+
+    const stats = await stat(newPath).catch(() => { throw errOperation(); });
+    if (!stats.isDirectory()) throw errOperation();
+
+    process.chdir(newPath);
+    console.log('Directory has been changed.');
+    return newPath;
+
+  } catch (err) {
+    console.error(err.message);
+    return currentPath;
+  }
+};

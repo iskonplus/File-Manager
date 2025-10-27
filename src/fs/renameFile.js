@@ -1,6 +1,6 @@
 import { rename } from 'fs/promises';
 import path from 'path';
-import { error } from '../errors/error.js';
+import { errOperation } from '../errors/errOperation.js';
 
 
 export const renameFile = async (currentPath, fileName, newFileName) => {
@@ -13,8 +13,9 @@ export const renameFile = async (currentPath, fileName, newFileName) => {
         await rename(filePath, newFilePath);
         console.log('File has been renamed');
 
-    } catch (err) {
-        console.error('Something went wrong: ', error.message);
+    } catch {
+        const error = errOperation();
+        console.error(error.message);
     }
 
 }

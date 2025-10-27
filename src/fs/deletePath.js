@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import { error } from '../errors/error.js';
+import { errOperation } from '../errors/errOperation.js';
 
 
 
@@ -14,7 +14,8 @@ export const deletePath = async (currentPath, fileName) => {
         console.log(`File ${fileName} has been deleted from ${currentPath}`);
 
     } catch {
-        console.error('Something went wrong:', error.message);
+        const error = errOperation();
+        console.error( error.message );
     }
 
 }

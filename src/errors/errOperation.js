@@ -1,0 +1,1 @@
+export const errOperation = () => new Error('Operation failed!!!');
