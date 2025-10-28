@@ -1,6 +1,6 @@
 import readline from 'readline/promises';
 import { getUserName } from './cli/args.js';
-import { userExit } from './userManager/userExit.js';
+import { userExit, printGreetings } from './userManager/userExit.js';
 import { getHomeDir, getEOL, cpuInfo, systemUserName, systemArchitecture} from './os/os.js';
 import { add, mkdir, cp, rm, ls, mv, cat, rn } from './fs/barrelFs.js';
 import { cd, up } from './nav/barrelNav.js';
@@ -18,11 +18,7 @@ const rlInterface = readline.createInterface({
     output: process.stdout,
 });
 
-
-console.log(' ');
-console.log(`Welcome to the File Manager, ${userName}!`);
-console.log(`You are currently in ${currentPath}`);
-console.log(' ');
+printGreetings(userName, currentPath);
 
 rlInterface.on('line', async args => {
 
