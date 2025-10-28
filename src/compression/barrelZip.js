@@ -1,0 +1,1 @@
+export {compressFile as compress} from './compress.js'
