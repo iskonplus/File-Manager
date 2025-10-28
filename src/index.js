@@ -2,9 +2,9 @@ import readline from 'readline/promises';
 import { getUserName } from './cli/args.js';
 import { userExit } from './userManager/userExit.js';
 import { getHomeDir, getEOL, cpuInfo, systemUserName, systemArchitecture} from './os/os.js';
-
 import { add, mkdir, cp, rm, ls, mv, cat, rn } from './fs/barrelFs.js';
 import { cd, up } from './nav/barrelNav.js';
+import { calcHash } from './hash/calcHash.js';
 
 
 
@@ -80,6 +80,9 @@ rlInterface.on('line', async args => {
             break;
         case 'os --architecture':
             await systemArchitecture();
+            break;
+        case `hash ${userArg}`:
+            await calcHash(currentPath, ...userArg.split(' '));
             break;
 
         default:
