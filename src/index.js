@@ -71,6 +71,10 @@ rlInterface.on('line', async args => {
         case 'os --cpus':
             await cpuInfo();
             break;
+        case 'os --homedir':
+            console.log(' ');
+            console.log(`Home directory: ${getHomeDir()}`);
+            break;
 
         default:
             console.log('');
