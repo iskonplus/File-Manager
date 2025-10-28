@@ -2,10 +2,22 @@ import os from 'os';
 
 const getHomeDir = () => os.homedir();
 
-const getEOL = async() => {
+const getEOL = async () => {
     console.log(' ');
     console.log(`Default EOL is ${JSON.stringify(os.EOL)}`);
 };
 
+const cpuInfo = async () => {
+    console.log(' ');
+    const cpus = os.cpus();
+    console.log(`Overall amount of CPUs: ${cpus.length}`);
 
-export { getHomeDir, getEOL };
+    cpus.forEach((cpu, index) => {
+        const { model, speed } = cpu;
+        console.log(`CPU ${index + 1}: ${model}, ${(speed / 1000).toFixed(2)} GHz`);
+    });
+
+}
+
+
+export { getHomeDir, getEOL, cpuInfo };

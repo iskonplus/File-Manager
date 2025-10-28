@@ -1,7 +1,7 @@
 import readline from 'readline/promises';
 import { getUserName } from './cli/args.js';
 import { userExit } from './userManager/userExit.js';
-import { getHomeDir, getEOL} from './os/os.js';
+import { getHomeDir, getEOL, cpuInfo} from './os/os.js';
 
 import { add, mkdir, cp, rm, ls, mv, cat, rn } from './fs/barrelFs.js';
 import { cd, up } from './nav/barrelNav.js';
@@ -67,6 +67,9 @@ rlInterface.on('line', async args => {
             break;
         case 'os --EOL':
             await getEOL();
+            break;
+        case 'os --cpus':
+            await cpuInfo();
             break;
 
         default:
