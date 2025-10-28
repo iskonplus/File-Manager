@@ -19,5 +19,15 @@ const cpuInfo = async () => {
 
 }
 
+const systemUserName = async () => {
+  console.log(' ');
+  console.log(`System user name: ${os.userInfo().username}`);
+};
+const systemArchitecture = async () => {
+  console.log(' ');
+  console.log(`CPU architecture: ${os.arch()}`);
+};
 
-export { getHomeDir, getEOL, cpuInfo };
+
+
+export { getHomeDir, getEOL, cpuInfo, systemUserName , systemArchitecture};
