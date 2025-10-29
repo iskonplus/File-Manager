@@ -7,6 +7,11 @@ const getNormalizePath = async (currentPath, userPath) => {
     return path.isAbsolute(userPath)
         ? path.normalize(userPath)
         : path.resolve(currentPath, userPath);
+    //     const validPath = path.isAbsolute(userPath)
+    //     ? path.normalize(userPath)
+    //         : path.resolve(currentPath, userPath);
+    // console.log("validPath.....", validPath);
+    // return validPath;
 }
 
 const validateDirectory = async (dirPath) => {

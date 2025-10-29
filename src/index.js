@@ -5,7 +5,7 @@ import { getHomeDir, getEOL, cpuInfo, systemUserName, systemArchitecture} from '
 import { add, mkdir, cp, rm, ls, mv, cat, rn } from './fs/barrelFs.js';
 import { cd, up } from './nav/barrelNav.js';
 import { calcHash } from './hash/calcHash.js';
-import {compress} from './compression/barrelZip.js'
+import {compress, decompress} from './compression/barrelZip.js'
 
 
 const userName = getUserName();
@@ -82,6 +82,9 @@ rlInterface.on('line', async args => {
             break;
         case `compress ${userArg}`:
             await compress(currentPath, ...userArg.split(' '));
+            break;
+        case `decompress ${userArg}`:
+            await decompress(currentPath, ...userArg.split(' '));
             break;
 
         default:
