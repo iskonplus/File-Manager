@@ -1,8 +1,6 @@
 import { cp, rm } from './barrelFs.js';
 import { errOperation } from '../errors/errOperation.js';
 
-
-
 export const moveFile = async (currentPath, fileName, filePath) => {
 
     try {
