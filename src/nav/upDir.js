@@ -10,6 +10,7 @@ export const upDir = (rootPath, currentPath) => {
     const parentPath = path.dirname(currentPath);
     process.chdir(parentPath);
     console.log('Directory has been changed.');
+    
     return parentPath;
 
 }
