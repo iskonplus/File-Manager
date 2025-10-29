@@ -4,9 +4,15 @@ import { errOperation } from '../errors/errOperation.js';
 
 
 const getNormalizePath = async (currentPath, userPath) => {
-    return path.isAbsolute(userPath)
+    // return path.isAbsolute(userPath)
+    //     ? path.normalize(userPath)
+    //     : path.resolve(currentPath, userPath);
+    
+        const validPath = path.isAbsolute(userPath)
         ? path.normalize(userPath)
-        : path.resolve(currentPath, userPath);
+            : path.resolve(currentPath, userPath);
+    console.log("validPath.....", validPath);
+    return validPath;
 }
 
 const validateDirectory = async (dirPath) => {
@@ -37,4 +43,4 @@ const invalidArgsLog = (args) => {
     console.log(`Invalid input: ${args}`);
 }
 
-export { getNormalizePath, validateDirectory, validateFile, invalidArgsLog };
+export { getNormalizePath, validateDirectory, validateFile,  invalidArgsLog};
