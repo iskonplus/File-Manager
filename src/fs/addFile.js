@@ -5,11 +5,13 @@ import path from 'path'
 
 export const createFile = async (currentPath, userPath) => {
     
-    const filePath = path.join(currentPath, userPath);
+    const baseName = path.basename(userPath);
+    const filePath = path.join(currentPath, baseName);
+
     try {
         console.log(' ');
         await writeFile(filePath, '', { flag: 'wx' });
-        console.log('File has been created.');
+        console.log(`File ${baseName} has been created in your current directory.`);
         
     } catch {
         const error = errOperation();
