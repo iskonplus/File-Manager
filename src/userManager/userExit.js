@@ -1,6 +1,7 @@
 const userExit  = (userName, rlInterface) => {
     console.log(' ');
     console.log(`Thank you for using File Manager, ${userName}, goodbye!`);
+    console.log(' ');
     rlInterface.close();
 }
 
@@ -11,4 +12,11 @@ console.log(`You are currently in ${currentPath}`);
 console.log(' ');
 }
 
-export {userExit, printGreetings}
+const printCurrentPath = (args, currentPath) => {
+        if (args !== '.exit') {
+        console.log(`You are currently in ${currentPath}`);
+        console.log(' ');
+    }
+}
+
+export {userExit, printGreetings, printCurrentPath}

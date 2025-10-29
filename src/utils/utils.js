@@ -7,11 +7,6 @@ const getNormalizePath = async (currentPath, userPath) => {
     return path.isAbsolute(userPath)
         ? path.normalize(userPath)
         : path.resolve(currentPath, userPath);
-    //     const validPath = path.isAbsolute(userPath)
-    //     ? path.normalize(userPath)
-    //         : path.resolve(currentPath, userPath);
-    // console.log("validPath.....", validPath);
-    // return validPath;
 }
 
 const validateDirectory = async (dirPath) => {
@@ -37,4 +32,9 @@ const validateFile = async (filePath) => {
     }
 };
 
-export { getNormalizePath, validateDirectory, validateFile };
+const invalidArgsLog = (args) => {
+    console.log('');
+    console.log(`Invalid input: ${args}`);
+}
+
+export { getNormalizePath, validateDirectory, validateFile, invalidArgsLog };

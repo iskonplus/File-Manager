@@ -1,24 +1,25 @@
 import readline from 'readline/promises';
 import { getUserName } from './cli/args.js';
-import { userExit, printGreetings } from './userManager/userExit.js';
-import { getHomeDir, getEOL, cpuInfo, systemUserName, systemArchitecture} from './os/os.js';
+import { userExit, printGreetings, printCurrentPath } from './userManager/userExit.js';
+import { getHomeDir, getEOL, cpuInfo, systemUserName, systemArchitecture } from './os/os.js';
 import { add, mkdir, cp, rm, ls, mv, cat, rn } from './fs/barrelFs.js';
 import { cd, up } from './nav/barrelNav.js';
 import { calcHash } from './hash/calcHash.js';
-import {compress, decompress} from './compression/barrelZip.js'
+import { compress, decompress } from './compression/barrelZip.js';
+import { invalidArgsLog } from './utils/utils.js';
 
 
 const userName = getUserName();
 const rootDir = getHomeDir();
 let currentPath = rootDir;
 
+printGreetings(userName, currentPath);
 
 const rlInterface = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 });
 
-printGreetings(userName, currentPath);
 
 rlInterface.on('line', async args => {
 
@@ -88,13 +89,11 @@ rlInterface.on('line', async args => {
             break;
 
         default:
-            console.log('');
-            console.log(`Invalid input: ${args}`);
+            invalidArgsLog(args);
             break;
     }
 
-    console.log(`You are currently in ${currentPath}`);
-    console.log(' ');
+    printCurrentPath(args, currentPath);
 
 })
 
